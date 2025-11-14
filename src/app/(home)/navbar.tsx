@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from 'react'
 import Navbar from "../documents/[documentId]/navbar";
 import SearchInput from "./search-input";
-
+import {UserButton} from "@clerk/nextjs";
 function Home() {
   return (
     <nav className="flex items-center justify-between h-full w-full">
@@ -15,6 +15,7 @@ function Home() {
         </div>
 
         <SearchInput/>
+        <UserButton/>
         <div/>
     </nav>
   )
