@@ -3,8 +3,9 @@ import Link from "next/link";
 import React from 'react'
 import Navbar from "../documents/[documentId]/navbar";
 import SearchInput from "./search-input";
-import {UserButton} from "@clerk/nextjs";
+import {UserButton,OrganizationSwitcher} from "@clerk/nextjs";
 function Home() {
+  
   return (
     <nav className="flex items-center justify-between h-full w-full">
         <div className="flex gap-3 items-center shrink-0 pr-6">
@@ -15,7 +16,15 @@ function Home() {
         </div>
 
         <SearchInput/>
-        <UserButton/>
+        <div className="flex gap-3 items-center pl-6">
+          <OrganizationSwitcher
+            afterCreateOrganizationUrl="/"
+            afterLeaveOrganizationUrl="/"
+            afterSelectOrganizationUrl="/"  // ← Redirect to doc list after switch
+            afterSelectPersonalUrl="/"
+          />
+          <UserButton/>
+        </div>
         <div/>
     </nav>
   )

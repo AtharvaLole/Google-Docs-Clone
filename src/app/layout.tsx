@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import './globals.css';
-import {Inter} from "next/font/google"
+import { Inter } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ConvexClientProvider } from "@/components/convex-client-provider";
-const inter=Inter({
-  subsets:["latin"]
-})
+import { SignedIn } from "@clerk/nextjs"; // ← Add this import
+import { OrgActiveSetter } from "@/components/OrgActiveSetter"; // ← Add this import
+import "@liveblocks/react-ui/styles.css";
+import "@liveblocks/react-tiptap/styles.css";
+
+const inter = Inter({
+  subsets: ["latin"]
+});
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -29,14 +35,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={inter.className}>
-          <NuqsAdapter>
-            <ConvexClientProvider>
-              {children}
-            </ConvexClientProvider>
-          </NuqsAdapter>
-        
+      <body className={inter.className}>
+        <NuqsAdapter>
+          <ConvexClientProvider>
+            <SignedIn>
+              <OrgActiveSetter/> {/* ← This activates the org automatically */}
+            </SignedIn>
+            {children}
+          </ConvexClientProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );

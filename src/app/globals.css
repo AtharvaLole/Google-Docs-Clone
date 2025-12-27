@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
 
+
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -300,4 +302,54 @@
       color: purple;
     }
   }
+}
+
+
+/* For mobile */
+.floating-threads {
+  display: none;
+}
+
+/* For desktop */
+.anchored-threads {
+  display: block;
+  max-width: 300px;
+  width: 100%;
+  position: absolute;
+  right: 12px;
+}
+
+@media (max-width: 640px) {
+  .floating-threads {
+    display: block;
+  }
+
+  .anchored-threads {
+    display: none;
+  }
+}
+
+
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+}
+
+.ProseMirror img.ProseMirror-selectednode {
+  outline: 3px solid #68cef8;
+  border-radius: 8px;
+}
+
+.ProseMirror .is-editor img {
+  cursor: default;
+}
+
+.ProseMirror .is-editing img {
+  cursor: default;
+}
+
+/* Resize handles via native browser (Tiptap v2 supports this automatically on selected image) */
+.ProseMirror-resizable img {
+  resize: both;
+  overflow: hidden;
 }

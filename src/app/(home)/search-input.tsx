@@ -1,6 +1,7 @@
 "use client"
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { useSearchParam } from '@/hooks/use-search-param'
 import { SearchIcon, XCircle, XIcon } from 'lucide-react'
 import React, { useRef, useState } from 'react'
 
@@ -8,12 +9,15 @@ function SearchInput() {
 
     const [value,setValue]=useState("")
     const inputref=useRef<HTMLInputElement>(null)
+    const [search,setSearch]=useSearchParam()
     const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
         setValue(e.target.value)
+        setSearch(e.target.value)
     }
 
     const handleClear=()=>{
         setValue("")
+        setSearch("")
     }
   return (
     <div className='flex flex-1 items-center justify-center'>

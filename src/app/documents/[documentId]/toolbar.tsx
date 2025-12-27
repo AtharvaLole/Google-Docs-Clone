@@ -20,6 +20,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Dialog,DialogContent,DialogFooter,DialogHeader,DialogTitle } from '@/components/ui/dialog';
 import { BulletList } from '@tiptap/extension-list';
+import "@liveblocks/react-tiptap/styles.css";
 
 interface toolbarbuttonProps {
     onClick?: () => void;
@@ -482,6 +483,8 @@ const Toolbarbutton=({onClick,isActive,icon:Icon}:toolbarbuttonProps)=> {
 }
 
 function Toolbar() {
+
+
     const {editor} = useEditorStore();
     console.log(editor)
     const sections:{
@@ -537,8 +540,8 @@ function Toolbar() {
         {
             label:"Comment",
             icon:MessageSquarePlusIcon,
-            onClick:()=>void(0),
-            isActive:false,
+            onClick:()=>editor?.chain().focus().addPendingComment().run(),
+            isActive:editor?.isActive("liveblockCommentMark"),
         },
         {
             label:"Todo List",
@@ -554,6 +557,7 @@ function Toolbar() {
         }
     ]
     ]
+    
   return (
     <div className='bg-[#F1F4F9] px-2.5 py-0.5 rounded-[24px] min-h-[40px] flex items-center gap-x-0.5 overflow-x-auto'>
         {sections[0].map((item)=>(
